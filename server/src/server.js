@@ -1,5 +1,5 @@
 const config = require('./config').api
-const { sequelize }  = require('./models')
+const { sequelize } = require('./models')
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
-/* const AuthenticationRouter = require('./routes/authorizaton.routes') */
+const AuthenticationRouter = require('./routes/authentication.routes')
 const UsersRouter = require('./routes/user.routes')
 
 app.use(function (req, res, next) {
@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json())
 
-/* AuthenticationRouter.routesConfig(app) */
+AuthenticationRouter.routesConfig(app)
 UsersRouter.routesConfig(app)
 
 sequelize.sync().then(() => {

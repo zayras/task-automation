@@ -2,12 +2,11 @@ module.exports = {
   api: {
     port: process.env.API_PORT || 3600,
     jwt: {
-      secret:  process.env.API_JWT_SECRET || 'secret',
+      secret: process.env.API_JWT_SECRET || 'secret1234567890',
       expiration: process.env.API_JWT_TTL || 3600,
     },
     permissionLevels: {
-      NORMAL_USER: 1,
-      PAID_USER: 4,
+      USER: 1,
       ADMIN: 2048
     }
   },

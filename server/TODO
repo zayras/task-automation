@@ -1,2 +1,6 @@
 - [] express may not need body parser in later versions
-- [] 
+- [] joi validation middleware
+- [] 404 error for users with no id
+- [] users are able to change there permission level
+- [] add argon
+- [] duplicate email error handling

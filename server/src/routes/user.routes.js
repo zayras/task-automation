@@ -1,36 +1,36 @@
 const UsersController = require('../controllers/user.controller')
-/* const PermissionMiddleware = require('../common/middlewares/auth.permission.middleware')
-const ValidationMiddleware = require('../common/middlewares/auth.validation.middleware')
-const config = require('../config').api */
+const PermissionMiddleware = require('../middleware/permission/permission.middleware')
+const AuthenticationMiddleware = require('../middleware/auth/auth.middleware')
 
-/* const ADMIN = config.permissionLevels.ADMIN
-const PAID = config.permissionLevels.PAID_USER
-const FREE = config.permissionLevels.NORMAL_USER */
+const config = require('../config').api
+
+const ADMIN = config.permissionLevels.ADMIN
+const USER = config.permissionLevels.USER
 
 exports.routesConfig = (app) => {
     app.post('/users', [
         UsersController.insert
     ])
-    /* app.get('/users', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(PAID),
+    app.get('/users', [
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         UsersController.list
     ])
     app.get('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(FREE),
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(USER),
         PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
         UsersController.getById
     ])
     app.patch('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
-        PermissionMiddleware.minimumPermissionLevelRequired(FREE),
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(USER),
         PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
         UsersController.patchById
     ])
     app.delete('/users/:userId', [
-        ValidationMiddleware.validJWTNeeded,
+        AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         UsersController.removeById
-    ]) */
+    ])
 }
