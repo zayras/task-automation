@@ -4,3 +4,6 @@
 - [] users are able to change there permission level
 - [] add argon
 - [] duplicate email error handling
+- [] update endpoint returns no json
+
+

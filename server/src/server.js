@@ -4,11 +4,11 @@ const { sequelize } = require('./models')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-
 const app = express()
 
 const AuthenticationRouter = require('./routes/authentication.routes')
 const UsersRouter = require('./routes/user.routes')
+const TasksRouter = require('./routes/task.routes')
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -27,6 +27,7 @@ app.use(bodyParser.json())
 
 AuthenticationRouter.routesConfig(app)
 UsersRouter.routesConfig(app)
+TasksRouter.routesConfig(app)
 
 sequelize.sync().then(() => {
     console.log("Database is connected")

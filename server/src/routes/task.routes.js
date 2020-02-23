@@ -1,5 +1,5 @@
-const UsersController = require('../controllers/user.controller')
-const UserValidationMiddleware = require('../middleware/user/validation.middleware')
+const TasksController = require('../controllers/task.controller')
+const TaskValidationMiddleware = require('../middleware/task/task.middleware')
 const PermissionMiddleware = require('../middleware/permission/permission.middleware')
 const AuthenticationMiddleware = require('../middleware/auth/auth.middleware')
 
@@ -9,30 +9,30 @@ const ADMIN = config.permissionLevels.ADMIN
 const USER = config.permissionLevels.USER
 
 exports.routesConfig = (app) => {
-    app.post('/users', [
-        UserValidationMiddleware.hasValidFields,
-        UsersController.insert
-    ])
-    app.get('/users', [
+    app.post('/tasks', [
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
-        UsersController.list
+        TaskValidationMiddleware.hasValidFields,
+        TasksController.insert
     ])
-    app.get('/users/:userId', [
+    app.get('/tasks', [
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(USER),
-        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
-        UsersController.getById
+        TasksController.list
     ])
-    app.patch('/users/:userId', [
+    app.get('/tasks/:taskId', [
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(USER),
-        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
-        UsersController.patchById
+        TasksController.getById
     ])
-    app.delete('/users/:userId', [
+    app.patch('/tasks/:taskId', [
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
-        UsersController.removeById
+        TasksController.patchById
+    ])
+    app.delete('/tasks/:taskId', [
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
+        TasksController.removeById
     ])
 }
