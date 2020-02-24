@@ -1,0 +1,6 @@
+                 http/socket       sequelize
+        runner <----------->  api <---------> db
+                               |
+                               | http/socket
+                               V
+                               ui
