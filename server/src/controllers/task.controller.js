@@ -1,8 +1,10 @@
 const { Task } = require('../models')
+const TaskRunnerService = require('../services/taskrunner.service')
 
 exports.insert = (req, res) => {
     Task.create(req.body)
         .then((result) => {
+            TaskRunnerService.push(result)
             res.status(201).send(result)
         }).catch((err) => {
             res.status(400).send(err)
@@ -36,6 +38,7 @@ exports.patchById = (req, res) => {
     Task.findByPk(req.params.taskId).then(task => {
         task.update(req.body)
             .then((result) => {
+                TaskRunnerService.push(result)
                 res.status(204).send({ result })
             })
     }).catch(() => {
@@ -47,6 +50,7 @@ exports.removeById = (req, res) => {
     Task.findByPk(req.params.taskId).then(task => {
         task.destroy()
             .then((result) => {
+                TaskRunnerService.pop(result)
                 res.status(204).send({ result })
             }).catch((err) => {
                 res.status(400).send('Error: failed to delete')

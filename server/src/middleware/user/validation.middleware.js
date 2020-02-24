@@ -8,7 +8,6 @@ exports.hasValidFields = (req, res, next) => {
         if (!req.body.password) {
             errors.push('Missing password field')
         }
-
         if (errors.length) {
             return res.status(400).send({ errors: errors.join(',') })
         } else {

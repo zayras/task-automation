@@ -1,5 +1,5 @@
 const TasksController = require('../controllers/task.controller')
-const TaskValidationMiddleware = require('../middleware/task/task.middleware')
+const TaskValidationMiddleware = require('../middleware/task/validation.middleware')
 const PermissionMiddleware = require('../middleware/permission/permission.middleware')
 const AuthenticationMiddleware = require('../middleware/auth/auth.middleware')
 
@@ -34,5 +34,16 @@ exports.routesConfig = (app) => {
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         TasksController.removeById
+    ])
+    ////////////////////////////////////////////////////////////////////////////////
+    app.post('/tasks/:taskId/start', [
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
+        TasksController.patchById
+    ])
+    app.post('/tasks/:taskId/puase', [
+        AuthenticationMiddleware.validJWTNeeded,
+        PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
+        TasksController.patchById
     ])
 }

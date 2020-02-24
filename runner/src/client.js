@@ -1,5 +1,5 @@
 const io = require('socket.io-client')
-const ioClient = io.connect('http://localhost:8000')
+const ioClient = io.connect('http://localhost:3600')
 
 const Scheduler = require('cron').CronJob
 
