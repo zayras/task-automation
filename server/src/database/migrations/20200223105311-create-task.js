@@ -16,6 +16,7 @@ module.exports = {
       criteria: { allowNull: false, type: Sequelize.STRING },
       commands: { allowNull: false, type: Sequelize.STRING },
       delay: { allowNull: false, type: Sequelize.INTEGER },
+      active: { allowNull: false, type: Sequelize.BOOLEAN },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

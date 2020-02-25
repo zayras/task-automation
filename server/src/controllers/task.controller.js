@@ -5,8 +5,9 @@ exports.insert = (req, res) => {
     Task.create(req.body)
         .then((result) => {
             TaskRunnerService.push(result)
-            res.status(201).send(result)
+            return res.status(201).send(result)
         }).catch((err) => {
+            console.log(err)
             res.status(400).send(err)
         })
 }
@@ -50,10 +51,12 @@ exports.removeById = (req, res) => {
     Task.findByPk(req.params.taskId).then(task => {
         task.destroy()
             .then((result) => {
-                TaskRunnerService.pop(result)
+                console.log(result)
+                TaskRunnerService.pop(result.id)
                 res.status(204).send({ result })
             }).catch((err) => {
-                res.status(400).send('Error: failed to delete')
+                console.log(err)
+                res.status(400).send('Error 400: failed to delete')
             })
     }).catch(() => {
         res.status(404).send('Error 404: No such task exist')

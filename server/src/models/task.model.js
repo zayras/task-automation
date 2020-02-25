@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     port: DataTypes.STRING,
     criteria: DataTypes.STRING,
     commands: DataTypes.STRING,
-    delay: DataTypes.INTEGER
+    delay: DataTypes.INTEGER,
+    active: DataTypes.BOOLEAN
   }, {})
   Task.associate = function (models) {
     // associations can be defined here

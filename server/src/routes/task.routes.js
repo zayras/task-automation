@@ -35,7 +35,7 @@ exports.routesConfig = (app) => {
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         TasksController.removeById
     ])
-    ////////////////////////////////////////////////////////////////////////////////
+    /* ////////////////////////////////////////////////////////////////////////////////
     app.post('/tasks/:taskId/start', [
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
@@ -45,5 +45,5 @@ exports.routesConfig = (app) => {
         AuthenticationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         TasksController.patchById
-    ])
+    ]) */
 }

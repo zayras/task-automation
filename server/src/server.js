@@ -4,6 +4,8 @@ const { sequelize } = require('./models')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+const TaskRunnerService = require('./services/taskrunner.service')
+
 const app = express()
 
 const server = require('http').Server(app)
@@ -35,8 +37,14 @@ TasksRouter.routesConfig(app)
 sequelize.sync().then(() => {
     console.log('Database is connected')
 
+    /*     app.listen(config.port, () => {
+            console.log('app listening at port %s', config.port)
+            TaskRunnerService.init()
+        }) */
+
     server.listen(config.port, () => {
         console.log('app listening at port %s', config.port)
+        TaskRunnerService.init()
     })
 
     io.on('connection', (socket) => {

@@ -5,5 +5,5 @@
 - [] add argon
 - [] duplicate email error handling
 - [] update endpoint returns no json
-
-
+- [] model methods and controller methods need to be split
+- [] batch command prsessing with delay
