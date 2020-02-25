@@ -7,3 +7,6 @@
 - [] update endpoint returns no json
 - [] model methods and controller methods need to be split
 - [] batch command prsessing with delay
+
+
+sequelize model:create --name TaskReturn --attributes name:string,command:string,stdout:text

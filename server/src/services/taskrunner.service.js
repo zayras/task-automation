@@ -1,6 +1,8 @@
+const fs = require('fs')
 const Scheduler = require('cron').CronJob
-// const SSHService = require('../services/ssh.service')
+const SSHService = require('./ssh.service')
 const { Task } = require('../models')
+
 
 const SchedudledTasks = new Map() // id and object
 const SchedudledJobs = new Map() // object and cronjob
@@ -18,8 +20,7 @@ exports.push = (task) => {
     // create new job
     let job = new Scheduler(task.criteria, () => {
         console.log(`Running task : ${JSON.stringify(task)}`)
-        // SSHService.execute()
-        // Runs.save()
+        SSHService.execute(task)
     })
     // add new job
     SchedudledJobs.set(task, job)
@@ -47,26 +48,17 @@ exports.init = () => {
     Task.findAll().then((tasks) => {
         tasks.forEach(task => {
             // let s = JSON.stringify(task, null, 2)
-            const cleaned = {
-                id: task.id,
-                name: task.name,
-                username: task.username,
-                password: task.password,
-                remote: task.remote,
-                port: task.port,
-                criteria: task.criteria,
-                commands: task.commands,
-                delay: task.delay,
-                active: task.active
-            }
-            console.log(cleaned)
-            // create new cronjob
-            let job = new Scheduler(cleaned.criteria, () => {
-                console.log(`Running task : ${JSON.stringify(cleaned)}`)
+
+            SchedudledTasks.set(task.id, task)
+            // create new job
+            let job = new Scheduler(task.criteria, () => {
+                console.log(`Setting task : ${JSON.stringify(task)}`)
+                SSHService.execute(task)
             })
-            if (cleaned.active) job.start()
-            SchedudledTasks.set(cleaned.id, cleaned)
-            SchedudledJobs.set(cleaned, job)
+            // add new job
+            SchedudledJobs.set(task, job)
+            // if set to run
+            if (task.active) SchedudledJobs.get(task).start()
         })
     })
 }
