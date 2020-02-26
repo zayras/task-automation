@@ -1,0 +1,29 @@
+@import "~bulma/sass/utilities/_all";
+
+
+// $primary: #4ae4df;
+$primary: hsl(242, 100%, 76%);
+$lovely: hsl(242, 48%, 37%);
+$rounded: 10px;
+$lovely-invert: findColorInvert($lovely);
+$primary-invert: findColorInvert($primary);
+$danger: #dc5222;
+$blue: #72d0eb;
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 3rem;
+
+$colors: (
+    "primary": ($primary, $primary-invert),
+    "lovely": ($lovely, $lovely-invert),
+);
+
+@import "~bulma";
+// $edo: pink;
+
+// .edo-theme {
+//     background-color: $edo;
+
+//     .hello-nuxt {
+//         color: red;
+//     }
+// }
